@@ -17,5 +17,13 @@ public class QuestionService {
   public List<Question> getAllQuestions() {
     return questionDao.findAll();
   }
+
+  public Question createQuestion(Question question) {
+    return questionDao.save(question);
+  }
+
+  public void deleteQuestion(Integer id) {
+    questionDao.deleteById(id);
+  }
   
 }
