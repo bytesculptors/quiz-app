@@ -9,20 +9,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kirito.quizapp.models.Question;
 import com.kirito.quizapp.services.QuestionService;
 
 @RestController
-@RequestMapping("question")
+@RequestMapping("questions")
 public class QuestionController {
 
   @Autowired
   QuestionService questionService;
 
-  @GetMapping("allQuestions")
-  public List<Question> hello() {
+  @GetMapping
+  public List<Question> getAllQuestions(@RequestParam(required=false) String category) {
+    if (category != null) {
+      return questionService.getQuestionsByCategory(category);
+    }
     return questionService.getAllQuestions();
   }
 
